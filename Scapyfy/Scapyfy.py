@@ -30,8 +30,8 @@ if args.file:
   with open(args.file) as fi: 
     user_input_prompt = fi.read() 
 load_dotenv() 
-os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY") if os.environ["OPENAI_API_KEY"] else args.api_key
-
+if not os.getenv("OPENAI_API_KEY"):
+    os.environ["OPENAI_API_KEY"] = args.api_key
 if not os.environ["OPENAI_API_KEY"]: 
   print_md_report("# ⚠️ Error: The OpenAI API secret key was not found!") 
   sys.exit(404) 
